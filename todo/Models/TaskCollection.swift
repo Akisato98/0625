@@ -6,7 +6,8 @@
 //  Copyright © 2019年 Jun Takahashi. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import FirebaseAuth
 
 protocol TaskCollectionDelegate: class {
     func reload()
@@ -15,9 +16,7 @@ protocol TaskCollectionDelegate: class {
 class TaskCollection {
     
     static var shared = TaskCollection()
-    
     public private(set) var tasks: [Task] = []
-
     weak var delegate: TaskCollectionDelegate?
     
 //    let userDefaults = UserDefaults.standard
@@ -38,6 +37,7 @@ class TaskCollection {
     
     // タスクの追加
     func addTask (_ task: Task) {
+        self.tasks.append(task)
         self.taskUseCase.addTask(task)
         self.save()
     }
@@ -51,20 +51,25 @@ class TaskCollection {
         self.save()
     }
     
-    
     func editTask (_ task: Task) {
-        let documentRef =
-        self.getCollectionRef().document(task.id)
-        documentRef.updateData(task.toValueDict()) { (err) in
-            if let _err = err {
-                print("データ修正失敗",_err)
-            } else {
-                print("データ修正成功")
-            }
-        }
-    self.taskUseCase.editTask(task)
+        self.taskUseCase.editTask(task)
         self.save()
     }
+//    func editTask(_ task: Task){
+//        let documentRef =
+//            self.getCollectionRef().document(task.id)
+//        documentRef.updateData(task.toValueDict()) { (err) in
+//            if let _err = err {
+//                print("データ修正失敗",_err)
+//            } else {
+//                print("データ修正成功")
+//            }
+//        }
+//            self.taskUseCase.editTask(task)
+//                self.save()
+//    }
+    
+
     
     private func save () {
         self.tasks = self.tasks.sorted(by: {$0.updateAt.dateValue() >
