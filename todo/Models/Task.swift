@@ -29,10 +29,13 @@ class Task {
 //    var latitude: Double?
 //    var longitude: Double?
     
-    init(id: String) {
+    init(id: String, value: [String: Any?]) {
         self.id = id
-        self.createAt = Timestamp(date: Date())
-        self.updateAt = Timestamp(date: Date())
+        self.title = value["title"] as? String ?? nil
+        self.memo = value["memo"] as? String ?? nil
+        self.coordinate = value["coordinate"] as? GeoPoint ?? nil
+        self.createAt = value["create_at"] as? Timestamp ?? Timestamp(date: Date())
+        self.updateAt = value["update_at"] as? Timestamp ?? Timestamp(date: Date())
     }
     //5-2
     func toValueDict() -> [String: Any] {

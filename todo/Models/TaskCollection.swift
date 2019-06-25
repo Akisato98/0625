@@ -100,7 +100,5 @@ class TaskCollection {
             self.tasks = _tasks
             self.save()
     }
-    
-    
 }
 }
