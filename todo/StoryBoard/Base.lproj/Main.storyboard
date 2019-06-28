@@ -40,7 +40,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="UlE-Kv-dQa">
                             <connections>
-                                <action selector="addTappedBtn:" destination="1h3-rH-AJr" id="TVg-nk-E36"/>
+                                <action selector="addTappedBtn:" destination="1h3-rH-AJr" id="nGr-Yv-LGh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
